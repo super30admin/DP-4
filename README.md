@@ -27,8 +27,11 @@ Return the largest sum of the given array after partitioning.
 Example 1:
 
 Input: A = [1,15,7,9,2,5,10], K = 3
+
 Output: 84
-Explanation: A becomes [15,15,15,9,10,10,10]
+
+    Explanation: A becomes [15,15,15,9,10,10,10]
+
 Note:
 
 1 <= K <= A.length <= 500
