@@ -22,6 +22,48 @@ public class MaximalSquare {
 	        }
 	        return maxsqlen * maxsqlen;
 	    }
-
-
+//brute force solution tc o(mn)^2  and sc O(1)
+	        public int maximalSquareBruteForce(char[][] matrix) {
+	            if(matrix.length ==0) return 0;
+	            int row = matrix.length;
+	            int col = matrix[0].length;
+	           
+	            int currLength =0;
+	            int max  =0;
+	            for(int i=0;i<row ;i++){
+	                for(int j=0;j<col;j++){
+	                    if(matrix[i][j]=='1'){
+	                         currLength=1;
+	                         boolean flag = true;
+	                         while((i+currLength)<row && (j+currLength)<col && flag == true){
+	                                
+	                             for(int k=j;k<=j+currLength;k++){
+	                                 if(matrix[i+currLength][k]=='0'){
+	                                    flag = false;
+	                                     break;
+	                                 }
+	                                 
+	                             }
+	                             for(int k=i;k<=i+currLength;k++){
+	                                 if(matrix[k][j+currLength]=='0'){
+	                                  flag = false;
+	                                  break;
+	                                 }
+	                                 
+	                             }
+	                          
+	                             if(flag) currLength++;
+	                         }
+	                        if(currLength>max){
+	                            max= currLength;
+	                        }
+	                        
+	                    }
+	                 
+	                }
+	            }
+	            return max*max;
+	            
+	        }
+	    
 }
