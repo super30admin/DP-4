@@ -1,0 +1,28 @@
+TC: O(n^3)
+SC: O(1)
+
+Leetcode: Time Limit Exceeded.
+Approach: Brute Force
+
+class Solution {
+    public int maximalSquare(char[][] matrix) {
+        int area =0;
+        int row= matrix.length;
+        int col = matrix[0].length;
+        for(int i=0;i< row; i++){
+            for(int j=0; j< col;j++){
+                if(matrix[i][j]=='1'){
+                    while(i<row && j< col){
+                        int d1=1,d2=1;
+                        if(matrix[i+d1][j] =='1' &&  matrix[i][j+d2] =='1' && matrix[i+d1][j+d2] =='1'){
+                            area = (d1+1)*(d1+1);
+                        }
+                        else break;
+                    }
+                }
+            }
+        }
+        System.out.println(area);
+       
+  }
+}
