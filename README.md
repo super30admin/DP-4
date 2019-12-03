@@ -1,4 +1,4 @@
-<b>Will Solve after the Class</b>
+
 # DP-4
 ## Problem1:(https://leetcode.com/problems/maximal-square/)
 
@@ -18,6 +18,10 @@ Input:
 1 0 0 1 0
 
 Output: 4
+
+Check top, left and top-left and store the minimun number of one's found in dp array. 
+
+
 
 ## Problem2:(https://leetcode.com/problems/partition-array-for-maximum-sum/)
 
