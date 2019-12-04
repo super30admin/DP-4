@@ -61,7 +61,7 @@ class Solution(object):
             for j in range(1, len(dp[0]), 1):
                 if matrix[i - 1][
                     j - 1] == '1':  # since we are moving down, whenever we enecounter and element other than zero will be 1
-                    dp[i][j] = min(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - i]) + 1
+                    dp[i][j] = min(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1]) + 1
                     Max_sqr = max(Max_sqr, dp[i][j])
 
         # Max_sqr = max(Max_sqr,curr)
