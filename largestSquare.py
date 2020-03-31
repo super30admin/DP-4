@@ -1,4 +1,14 @@
 '''
+Effecient:
+Time Complexity: O(n^2)
+Space Complexity: O(n^2)
+Explanation: Use the logic to find the length of the square from the neighboring cells. Use the following conditions
+to find the DP solution:
+If i == 0 or j ==0: length =0
+if [i][j] == 0 length = 0
+if [i][j] == 1 length =  1 + min(min(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1])
+
+BruteForce:
 Time Complexity: O((mn^2)
 Space Complexity: O(1)
 Did this code successfully run on Leetcode : Yes
@@ -9,6 +19,30 @@ size on the way.
 
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
+        if matrix == None or len(matrix) == 0:
+            return 0
+        # +1 because first few rows and columns are 0
+
+        rows = len(matrix)
+
+        if rows > 0:
+            col = len(matrix[0])
+        else:
+            col = 0
+
+        dp = [[0 for i in range(col + 1)] for j in range(rows + 1)]
+
+        maxL = 0
+
+        for i in range(1, (rows + 1)):
+            for j in range(1, (col) + 1):
+                if matrix[i - 1][j - 1] == '1':
+                    dp[i][j] = 1 + min(min(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1])
+                    maxL = max(maxL, dp[i][j])
+
+        return maxL * maxL
+
+    def maximalSquareBruteForce(self, matrix: List[List[str]]) -> int:
         if matrix == None or len(matrix) == 0:
             return 0
         rows = len(matrix)
