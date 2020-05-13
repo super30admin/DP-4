@@ -1,0 +1,28 @@
+Time complexity: O(nk)
+Space complexity: O(n)
+Did this code successfully submitted on leetcode: Yes
+
+class Solution {
+    public int maxSumAfterPartitioning(int[] A, int K) {
+        
+        if(A==null || A.length==0)
+            return 0;
+        
+        int n = A.length;
+        
+        int[] dp = new int[n+1];
+        
+        for(int i=1; i<=n; i++){
+            int best = -1;
+            int max = A[i-1];
+            
+            for(int j=0; j<K && i-j-1>=0; j++){
+                max = Math.max(max, A[i-1-j]);
+                best = Math.max(best, dp[i-1-j]+(j+1)*max);
+            }
+            
+            dp[i]=best;
+        }
+       return dp[n]; 
+    }
+}
