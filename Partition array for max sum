@@ -1,0 +1,18 @@
+class Solution:
+    def maxSumAfterPartitioning(self, A: List[int], K: int) -> int:
+        if(A==None or len(A)==0):
+            return 0
+        n=len(A)
+        dp=[0]*n
+        maximum=0
+        for i in range(len(dp)):
+            if(i<K):
+                maximum=max(maximum,A[i])
+                dp[i]=maximum*(i+1)
+            else:
+                maximum = 0
+                for j in range(1, K + 1):
+                    maximum = max(A[i - j + 1], maximum)
+                    dp[i] = max(dp[i], dp[i - j] + maximum * j)
+        return dp[n - 1]
+                
