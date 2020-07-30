@@ -18,5 +18,6 @@ class Solution:
                 j+=1
         return dp[len(dp)-1]
         
-                
+#timeComplexity is O(nK)
+#space is O(n)
         
