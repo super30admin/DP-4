@@ -1,3 +1,4 @@
+/********************************** Using Dynamic Programing *********************************/
 // Time Complexity : O(m * n), m and n are rows and col, single pass
 // Space Complexity : O(m * n), dp matrix of same size used
 // Did this code successfully run on Leetcode : Yes
@@ -22,6 +23,45 @@ class Maximal_Square {
 					dp[i][j] = 1 + Math.min(dp[i-1][j], Math.min(dp[i][j-1], dp[i-1][j-1]));
 					if(max < dp[i][j])
 						max = dp[i][j]; //updating the max value
+				}
+			}
+		}
+		return max * max;
+	}
+}
+
+
+/**********************************Brute force *********************************/
+//Time Complexity : O(m * n)^2, m and n are rows and col
+//Space Complexity : O(1)
+//Did this code successfully run on Leetcode : Yes
+//Any problem you faced while coding this : No
+
+class Solution {
+	public int maximalSquare(char[][] matrix) {
+		if(matrix == null || matrix.length == 0)
+			return 0;
+		boolean flag;
+		int max = 0;
+		for(int i=0; i<matrix.length; i++){
+			for(int j=0;j<matrix[0].length; j++){
+				if(matrix[i][j] == '1'){
+					int curr = 1;
+					flag = true;
+
+					while(i+curr < matrix.length && j+curr < matrix[0].length && flag){ // boundary check and flag should be true
+						for(int k=i+curr; k>=i; k--){    // check all values above the point till i
+							if(matrix[k][j+curr] == '0')
+								flag = false;
+						}
+						for(int k=j+curr; k>=j; k--){    // check all values above the point till j
+							if(matrix[i+curr][k] == '0')
+								flag = false;
+						}
+						if(flag)
+							curr++; // increase curr as it will give size of square and update curr for  next square size check
+					} 
+					max = Math.max(max, curr);
 				}
 			}
 		}
