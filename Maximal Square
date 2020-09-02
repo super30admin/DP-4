@@ -1,0 +1,41 @@
+Approach 1 : Brute Force Approach . Go in the diagonal direction 
+Time Complexity : O(mn*2) In the worst case , all 1's so at every 1 we will be visiting all the values .
+Space Complexity :
+class Solution {
+    public int maximalSquare(char[][] matrix) {
+        //edge case
+        if(matrix==null || matrix.length==0) return 0;
+        int m=matrix.length; int n= matrix[0].length;
+        boolean flag = false; int max=0;
+        for(int i=0;i<m;i++){
+            for (int j=0;j<n;j++){
+                if(matrix[i][j]=='1'){
+                    int curr=1;flag =true ;// valid square with length //as curr
+                    while(i+curr<m && j+curr<n && flag){
+                        //check for column if all 1's till boundary
+                        for(int k=i+curr;k>=i;k--){
+                            if(matrix[k][j+curr]=='0'){
+                                flag=false;
+                                break;                               
+                            }
+                            
+                        }
+                        for (int k=j+curr;k>=j;k--){
+                        //check for rows if all 1's till boundary
+                            if(matrix[i+curr][k]=='0'){
+                                flag=false;
+                                break;
+                            }
+                        }
+                        if(flag==true) 
+                            curr++; // Next element in the diagonal                    
+                    }
+                    max=Math.max(max,curr);
+                }
+            }
+        }
+        return max*max;
+    
+        
+    }
+}
