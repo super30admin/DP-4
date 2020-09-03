@@ -1,0 +1,32 @@
+Approach 1 : Brute Force Approach. At every index I can have k splits.
+Time Complexity: k^N
+Space Complexity :
+Approach 2 : Dynamic Programming . At every index I can have k splits. While doing this , you might encounter few already splits that repeates. So we can do DP
+Time Complexity :O(nk) // Every index we are doing k splits
+Space Complexity : O(n)
+class Solution {
+    public int maxSumAfterPartitioning(int[] A, int K) {
+        //edge Case
+        if(A==null || A.length==0) return 0;
+        int n=A.length;
+        int[] dp=new int[n];
+        for(int i=0;i<n;i++){
+            int max=A[i];
+            for (int j=1;i-j+1>=0 && j<=K;j++){ // J as Splits
+                max=Math.max(max,A[i-j+1]);
+                if((i-j)>=0){
+                    dp[i]=Math.max(dp[i],max*j +dp[i-j]);
+                    
+                }else{
+                    dp[i]=Math.max(dp[i],max*j);
+                }
+                
+                
+            }
+        }
+        return dp[n-1];
+        
+    }
+}
+
+
