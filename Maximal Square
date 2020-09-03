@@ -42,7 +42,7 @@ class Solution {
 
 Approach 2 : Dyanamic Programming. We have sub problems where we keep checking if 1's exists in rows and columns .
 Time complexity : O(m*n)
-Space Complexitty :
+Space Complexitty :O(m*n)
 class Solution {
     public int maximalSquare(char[][] matrix) {
         if(matrix==null || matrix.length==0) return 0;
