@@ -1,4 +1,4 @@
-//  Problem 1 - Maximal Square
+// Problem 1 - Maximal Square
 // Time Complexity: O(n * m) where n = number of rows, m = number of columns
 // Space Complexity: O(n * m)
 
@@ -35,5 +35,43 @@ class Solution {
     }
 
     return max * max;
+  }
+}
+
+// Problem 2 - Partition Array for Maximum Sum
+// Time Complexity: O(n * k) where n = length of array
+// Space Complexity: O(n)
+
+// Algorithm
+// 1 - initialize an array
+// 2 - loop over length of array
+// 3 - initiliaze a max variable
+// 4 - loop for k times by considering out of bounds logic as well
+// 5 - get the max
+// 6 - return the last element
+class Solution {
+  public int maxSumAfterPartitioning(int[] arr, int k) {
+    if (arr == null || arr.length == 0) {
+      return 0;
+    }
+    // 1
+    int[] dp = new int[arr.length];
+    // 2
+    for (int i=0; i<arr.length; i++) {
+      // 3
+      int max = Integer.MIN_VALUE;
+      // 4
+      for (int j = 1; j<=k && (i-j+1)>=0; j++) {
+        // 5
+        max = Math.max(max, arr[i - j + 1]);
+        if (i >= j) {
+          dp[i] = Math.max(dp[i], dp[i - j] + max*j);
+        } else {
+          dp[i] = Math.max(dp[i], max*j);
+        }
+      }
+    }
+    // 6
+    return dp[arr.length - 1];
   }
 }
