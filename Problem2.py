@@ -1,18 +1,22 @@
-#Time complexity : O(mn)
-#Space complexity : O(mn)
+"""
+Time Complexity: O(NK)
+Space Complexity: O(N)
+"""
+
 
 class Solution:
-    def maximalSquare(self, matrix: List[List[str]]) -> int:
-        if not matrix:
-            return 0
-        rows = len(matrix)
-        cols = len(matrix[0])
-        dp = [[0 for i in range(cols + 1)] for j in range(rows + 1)]
-        maxLen = 0
-        for i in range(1,rows+1):
-            for j in range(1,cols+1):
-                if matrix[i-1][j-1] == '1':
-                    dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1])+1
-                    maxLen = max(maxLen, dp[i][j])
-        return maxLen * maxLen
-        
+    def maxSumAfterPartitioning(self, arr: List[int], K: int) -> int:
+
+        dp = [float('-inf') for i in range(len(arr) + 1)]
+        dp[-1] = 0
+        dp[-2] = arr[-1]
+
+        for j in reversed(range(len(arr) - 1)):
+            cur_max = float('-inf')
+            for k in range(K):
+                if j + k == len(arr):
+                    break
+                cur_max = max(cur_max, arr[j + k])
+                dp[j] = max(dp[j], (k + 1) * cur_max + dp[j + k + 1])
+
+        return dp[0]
