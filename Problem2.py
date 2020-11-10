@@ -1,3 +1,6 @@
+#Time complexity : O(mn)
+#Space complexity : O(mn)
+
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
         if not matrix:
