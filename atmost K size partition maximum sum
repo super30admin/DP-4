@@ -1,0 +1,23 @@
+// time complexity : O(NK)
+// subproblem: Find the maximum sum of  partition i can get for [1]
+// Find the maximum sum parition I can get for [1, 15] : max sum after creating all possible partitions
+// Find the maximum sum partition I can get for [1, 15, 7] : max sum after creating all possible partitions
+class Solution {
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        int arrLen = arr.length;
+        int dp[] = new int[arrLen];
+       // this bottom up approach -> we find max sum for every index of array 
+        for(int i = 0; i < arrLen; i++){
+            // window of size (k)
+            int currMax = 0;
+            for(int K = 1 ; K <= k && i-K+1 >= 0 ; K++){
+                // everytime we find the maximum element in the window and multiply it with size of window
+                // maximum element so far in the window of size of K
+                currMax = Math.max(currMax, arr[i-K+1]);
+                // get max of all possible cuts or all possible windows encountered so far
+                dp[i] = Math.max(dp[i], (i-K >= 0 ? dp[i-K] : 0) + currMax*K);
+            }
+        }
+        return dp[arrLen-1];
+    }
+}
