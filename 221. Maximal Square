@@ -1,0 +1,35 @@
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        
+        
+        # initialize number of rows and number of columns
+        nrows, ncols = len(matrix), len(matrix[0]);
+        
+        # initialize dp array
+        dp = [[0]*ncols for i in range(nrows)];
+        
+        maxval = 0;
+        # iterate through the given matrix
+        for i in range(nrows):
+            for j in range(ncols):
+                # check whether current element belongs to first row or first col
+                # check for value present at current pos
+                if(i == 0 or j == 0):
+                    dp[i][j] = int(matrix[i][j]);
+                    maxval = max(maxval, dp[i][j])
+                # find three adjacent(left,right, diagonal) elements of current element and pick 
+                # the minimum among them add 1 to it which gives the maximum side
+                # that can be formed by that position
+                else:
+                    if(matrix[i][j] == '1'):
+                        minval = min([dp[i-1][j], dp[i][j-1], dp[i-1][j-1]]);
+                        dp[i][j] = minval + 1;
+                        maxval = max(maxval, dp[i][j])
+        return maxval * maxval;
+    
+    '''
+    time complexity = O(n*m)
+    space complexity = O(n*m)
+    '''
+                    
+        

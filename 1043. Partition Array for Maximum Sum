@@ -1,0 +1,48 @@
+
+class Solution:
+    
+    def fun(self, idx, k, arr, dp):
+        if(idx == len(arr)):
+            return 0;
+        # if the value is already calculated, return it
+        if(dp[idx]!= -1):
+            return dp[idx];
+        
+        # initialize maxval to store the maxval out of that path
+        maxpathval = float('-inf');
+        
+        # variable to store the max value of sub array of size j = 1 to k
+        maxi = 0;
+        
+        # take sub arrays of lengths j = 1 to k
+        for j in range(1, k+1):   
+            if(idx + j <= len(arr)):
+                #update the max value of sub array 
+                maxi = max(arr[idx + j - 1], maxi);
+                # store the current path sum
+                temppathval = maxi * j + self.fun(idx + j, k, arr, dp);
+                # update the current path sum
+                if( temppathval > maxpathval):
+                    maxpathval = temppathval;
+        
+        dp[idx] = maxpathval;
+        return dp[idx];
+    
+    
+    def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
+        n = len(arr)
+        dp = [-1 for i in range(n)];
+        return self.fun(0, k, arr, dp);
+    '''
+    time complexity = O(n*k)
+    space complexity = O(n)
+    '''
+        
+        
+            
+                
+            
+        
+        
+        
+        
