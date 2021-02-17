@@ -1,7 +1,8 @@
 class Solution:
     def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
         '''
-        Time, Space Complexity: O(n)
+        Time Complexity: O(kn)
+        Space Complexity: O(n)
         This question was difficult to understand and code
         '''
         dp = [0 for i in range(0,len(arr))]
