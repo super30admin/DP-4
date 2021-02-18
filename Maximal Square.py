@@ -1,7 +1,7 @@
 class Solution:
     #Solution 1
     def maximalSquare(self, matrix: List[List[str]]) -> int:
-        #Approach: Dynamic Proogramming
+        #Approach: Dynamic Programming
         #Time Complexity: O(m * n)
         #Space Complexity: 
         #where, the given matrix is of size m * n
