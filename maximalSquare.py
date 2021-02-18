@@ -31,6 +31,5 @@ class Solution:
                     dp[i][j] = min(dp[i-1][j-1], dp[i-1][j],dp[i][j-1])+1
                 maxVal = max(maxVal, dp[i][j])
                 
-        print(dp)
         return maxVal*maxVal
     
