@@ -1,0 +1,112 @@
+//TC - O(m^2n^2)
+//SC - o(1)
+class Solution {
+    public int maximalSquare(char[][] matrix) {
+        if(matrix == null || matrix.length == 0)
+            return 0;
+        
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int maxsLen = 0;
+        boolean flag = false;
+        
+        for(int i = 0; i< m; i++) {
+            for(int j = 0; j < n; j++) {
+                
+                //if 1 check max seq we can make from this point
+                if(matrix[i][j] == '1') {
+                    flag = true;
+                    int curr = 1;
+                    
+                    //traverse diagonally and check all are one or not
+                    //store the maxLen
+                    while(i+curr<m && j+curr<n && flag){
+                        //check all are ones till we hit row i
+                        for(int k =i+curr ; k>=i;k--) {
+                            if(matrix[k][j+curr] == '0'){
+                                flag = false;
+                                break;
+                            }
+                        }
+                         //check all are ones till we hit col j
+                        for(int k =j+curr ; k>=j;k--) {
+                            if(matrix[i+curr][k] == '0'){
+                                flag = false;
+                                break;
+                            }
+                        }
+                    //if all ones increase curr
+                     if(flag)
+                        curr++;
+                    }
+                    maxsLen = Math.max(maxsLen,curr);
+                }
+            }
+        }
+        return maxsLen * maxsLen ;
+    }
+}
+
+
+//TC - O(mn)
+//SC - o(n)
+class Solution {
+    public int maximalSquare(char[][] matrix) {
+        if(matrix == null || matrix.length == 0)
+            return 0;
+        
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int maxsLen = 0;
+        int []dp = new int [n+1];
+        int prev = 0;
+        
+        for(int i = 1; i<= m; i++) {
+            for(int j = 1; j <= n; j++) {
+                //if matrix is one find min of 3 dir and add 1 
+                if(matrix[i-1][j-1] == '1') {
+                    //it will be prev for next iteration so store in temp var
+                    int temp = dp[j];
+                    //find min from 3 and add 1
+                    dp[j] = Math.min(dp[j],Math.min(prev,dp[j-1])) +1;
+                    //change prev val
+                    prev = temp;
+                }
+                //assign 0
+                else
+                    dp[j] = 0;
+                //store max len of square until now
+                maxsLen = Math.max(maxsLen,dp[j]);
+            }
+        }
+        
+        return maxsLen * maxsLen ;
+    }
+}
+
+//TC - O(mn)
+//SC - o(mn)
+class Solution {
+    public int maximalSquare(char[][] matrix) {
+        if(matrix == null || matrix.length == 0)
+            return 0;
+        
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int maxsLen = 0;
+        int [][]dp = new int [m+1][n+1];
+        
+        for(int i = 1; i<= m; i++) {
+            for(int j = 1; j <= n; j++) {
+                if(matrix[i-1][j-1] == '1')
+                    dp[i][j] = Math.min(dp[i-1][j],Math.min(dp[i-1][j-1],dp[i][j-1])) +1;
+                else
+                    dp[i][j] = 0;
+                
+                maxsLen = Math.max(maxsLen,dp[i][j]);
+            }
+        }
+        
+        return maxsLen * maxsLen ;
+    }
+}
