@@ -1,0 +1,27 @@
+class Solution {
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        
+        //1043. Partition Array for Maximum Sum
+        //Time complexity : O(n*k)
+        //Space complexity : O(n)
+        
+   if(arr == null ||arr.length ==0)
+       return 0;
+        
+        int len = arr.length;
+        int[]  dp = new int[len];
+        
+        for(int i=0;i<len;i++){
+            int max = arr[i];
+            for(int j =1;j<=k && i-j+1 >=0 ;j++){ 
+                
+                max = Math.max(max,arr[i-j+1]);
+                if(i-j>=0)
+                dp[i] = Math.max((j*max) + dp[i-j] , dp[i]);
+                else
+                    dp[i] = Math.max((j*max) ,dp[i]);
+            }
+        }
+        return dp[len-1];
+    }
+}
