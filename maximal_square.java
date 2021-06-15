@@ -1,5 +1,6 @@
 //Bruteforce
 //Time complexity m power2 n power 2
+//Space : o(1)
 class Solution {
     public int maximalSquare(char[][] matrix) {
         if(matrix == null || matrix.length == 0) return 0;
@@ -42,6 +43,7 @@ class Solution {
 
 //Optimal solution
 //Time complexity: o(mxn)
+//space : o(n)
 
 class Solution {
     public int maximalSquare(char[][] matrix) {
