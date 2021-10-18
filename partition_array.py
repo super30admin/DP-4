@@ -1,7 +1,7 @@
 # // Time Complexity :O((n*k)
 # // Space Complexity :O(n)
-# // Did this code successfully run on Leetcode :
-# // Any problem you faced while coding this :
+# // Did this code successfully run on Leetcode :yes
+# // Any problem you faced while coding this :no
 
 
 # // Your code here along with comments explaining your approach
