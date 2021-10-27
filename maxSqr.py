@@ -1,7 +1,7 @@
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
         #TC O(mn)
-        # SC O(mn)
+        # SC O(n)
         if matrix is None or len(matrix) == 0:
             return 0
         m = len(matrix)
@@ -19,6 +19,8 @@ class Solution:
                     dp[j]= min(dp[j-1], min((dp[j]),prev))  +1
                     maxs = max(maxs,dp[j])
                     prev = temp
+                else:
+                    dp[j] = 0
         # print(dp)
         return maxs * maxs
 #         #TC O(m*n)^2
