@@ -1,0 +1,32 @@
+//TC:-  n*k
+//SC:- O(N)
+
+class Solution {
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        
+        int [] dp = new int[arr.length];
+        
+        dp[0] = arr[0];
+        
+        for(int i = 1; i<arr.length; i++)
+        {
+            int max = arr[i];
+            for(int partition = 1; partition<=k; partition++)
+            {
+                
+                if(i-partition < 0)
+                {
+                    dp[i] = Math.max((i+1)*max,dp[i]);
+                    break;
+                }
+                
+                    dp[i] = Math.max(dp[i-partition]+partition*max, dp[i]);
+                    max = Math.max(max, arr[i-partition]);
+                
+                
+            }
+        }
+        
+        return dp[arr.length-1];
+    }
+}
