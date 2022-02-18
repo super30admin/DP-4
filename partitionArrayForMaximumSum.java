@@ -5,7 +5,7 @@ package DataStructure.DynamicProgramming;
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
 
-public class S30_M_1043_PartitionArrayForMaximumSum {
+public class PartitionArrayForMaximumSum {
     public static void main(String[] args) {
         int[] arr = {1,15,7,9,2,5,10};
         int k = 3;

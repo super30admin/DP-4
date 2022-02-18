@@ -5,7 +5,7 @@ package DataStructure.DynamicProgramming;
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
 
-public class S30_M_221_MaximalSquare_BottomUp {
+public class MaximalSquare_BottomUp {
     public static void main(String[] args) {
         char[][] matrix = {{'1','0','1','0','0'},{'1','0','1','1','1'},{'1','1','1','1','1'},{'1','0','0','1','0'}};
         maximalSquare(matrix);
