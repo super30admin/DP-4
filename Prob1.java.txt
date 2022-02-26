@@ -1,0 +1,31 @@
+class Solution {
+    public int maximalSquare(char[][] matrix) {
+        
+        if(matrix == null || matrix.length == 0)
+            return 0;
+        int m = matrix.length;
+        int n = matrix[0].length;
+        
+        int maxLength = 0;
+        int[] dp = new int[n+1];
+        int diagUp = 0;
+        
+       int temp = diagUp;
+        
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                diagUp = dp[j+1];
+                if(matrix[i][j] == '1'){
+                    
+                    dp[j+1] = 1+Math.min(Math.min(dp[j],dp[j+1]),temp);
+                    maxLength = Math.max(dp[j+1],maxLength);  
+                    
+                }else{
+                    dp[j+1] = 0;
+                }
+                temp = diagUp;
+            }
+        }
+        return maxLength*maxLength;
+    }
+}
