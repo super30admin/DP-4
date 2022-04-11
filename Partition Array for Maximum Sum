@@ -1,0 +1,36 @@
+//TC = O(n*k)  n is for dp nodes for k len partition
+//SC = O(n+k)
+class Solution { 
+    private int[] dp;
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        dp = new int[arr.length];
+        Arrays.fill(dp, -1);
+        return maxSumAfterPartitioning(arr, 0, k);
+    }
+    
+    private int maxSumAfterPartitioning(int[] arr, int i, int k){
+        //base
+        if(i == arr.length){
+            return 0;
+        }
+        
+        if(dp[i] == -1){
+            int ans=0, max=0; 
+            
+            for(int len=1; len<=k && i+len-1 < arr.length; len++){
+                
+                max = Math.max(max, arr[i+len-1]);
+                
+                int ans2 = max*len + maxSumAfterPartitioning(arr, i+len, k);
+                
+                ans = Math.max(ans, ans2);
+            }
+            
+            dp[i] = ans;
+            
+        }
+        
+        return dp[i]; 
+
+    }
+}
