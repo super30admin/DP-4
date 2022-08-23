@@ -1,4 +1,4 @@
-//Time Complexity: O(m+n)^2; where m is the no. of rows & n is the no. of columns.
+//Time Complexity: O(m*n)^2; where m is the no. of rows & n is the no. of columns.
 //Space Complexity: O(1)
 //Code run successfully on LeetCode.
 
