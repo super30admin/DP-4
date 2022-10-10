@@ -1,0 +1,18 @@
+class Solution:
+    def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
+        a     =  len(arr)
+        b  =  [ 0 for _ in range(k) ]
+        for i in range(a-1,-1,-1):
+            m, best  =  0, 0
+            for j in range(i,min(a,i+k)):
+                if arr[j] > m:
+                    m  = arr[j]
+                s  =  (j-i+1)*m + b[(j+1)%k]
+                if s > best:
+                    best  =  s
+            b[i%k] = best
+        return b[0]
+    
+# Time Complexity: O(mn)
+# Space Complexity: O(n)
+# Successfully implemented on Leetcode
