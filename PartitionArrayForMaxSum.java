@@ -1,6 +1,6 @@
-// Time Complexity : O(n)
+// Time Complexity : O(kn)
 // Space Complexity :O(n)
-// n is the length of given array
+// n is the length of given array and k is the max partition length
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this : no
 
