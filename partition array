@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int maxSumAfterPartitioning(vector<int>& arr, int k) {
+        
+        int n = arr.size();
+        vector<int> dp(n,0);
+        dp[0]=arr[0];
+        
+        for(int i = 1; i<n ; i++){
+            int maxi = dp[i];
+        for(int j = 1; j<= k && i-j+1>=0  ; j++){
+            maxi = max(maxi, arr[i-j+1]); /* check for bigger element among window */
+            if(i-j>=0)
+            {
+            dp[i] = max( dp[i] /* like 82 for j =1, 83 for j = 2*/, j*maxi /* window length multiply by max 
+            element*/ + dp[i-j] /* dp's earlier result / best answer till now before window*/);
+            }
+            else{
+                dp[i] = max(dp[i], j*maxi);
+            }
+        }
+        }
+        return dp[n-1];
+    }
+};
