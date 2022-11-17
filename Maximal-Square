@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int maximalSquare(vector<vector<char>>& matrix) {
+        if(matrix.size() == 0)
+        return 0;
+        int r = matrix.size();
+        int c = matrix[0].size();
+        vector<int> dp(c+1,0);
+     
+        int maximum = 0;
+        int prevdiag = 0;
+        int temp = 0;
+        for(int i = 1 ; i < r+1 ; i++){
+            for(int j = 1; j < c+1 ; j++){
+               temp = dp[j] ;   /* storing current val, as it is top, and for j++ it will become diagonal */
+               if(matrix[i-1][j-1] == '1')/* we are ahead of original, refering to original using -1 */
+               {
+                   dp[j] = min(dp[j] /*current which was top till now */,min(dp[j-1] /* left*/,prevdiag /* diagonal !*/))+1;
+                   maximum = max(dp[j],maximum);
+               }
+                else{
+                    dp[j] = 0;
+                }
+               prevdiag = temp;
+        }
+        }
+      return (maximum)*(maximum);  
+    }
+};
