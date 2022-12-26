@@ -1,4 +1,4 @@
-//tc is O(n)
+//tc is O(n * k)
 //sc is (n)
 class Solution {
     public int maxSumAfterPartitioning(int[] arr, int k) {
