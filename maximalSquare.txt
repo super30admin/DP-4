@@ -1,0 +1,18 @@
+# Time Complexity :O(mn)
+# Space Complexity :O(1)
+# Did this code successfully run on Leetcode :Yes       
+# Any problem you faced while coding this :No
+
+
+class Solution(object):
+    def maximalSquare(self, matrix):
+        maxx=0
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if(i==0 or j==0):
+                    maxx=max(maxx,int(matrix[i][j]))
+
+                elif(matrix[i][j]=='1'):
+                    matrix[i][j]=1+min(int(matrix[i-1][j]),int(matrix[i][j-1]),int(matrix[i-1][j-1]))
+                    maxx=max(maxx,matrix[i][j])
+        return(maxx*maxx)
