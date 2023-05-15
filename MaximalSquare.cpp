@@ -40,6 +40,42 @@ public:
     }
 };
 
+// Space optimised DP
+// Time Complexity - O(m*n)
+// Space Complexity - O(n)
+
+class Solution {
+public:
+    int maximalSquare(vector<vector<char>>& matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+        int side = 0;
+        vector<int> dp(n+1, 0);
+        
+        
+        for(int i = 1; i <= m; i++){
+            int diagUp = 0;
+            for(int j = 1; j <= n; j++){
+                int temp = dp[j];
+                if(matrix[i-1][j-1] == '1'){
+                    int top = dp[j];
+                    int left = dp[j-1];
+                    int topLeft = diagUp;
+                    int curr = 1 + min(top, min(left, topLeft));
+                    side = max(curr, side);
+                    dp[j] = curr;
+                }
+                else
+                    dp[j] = 0;
+                diagUp = temp;
+            }
+        }
+        return side*side;
+    }
+};
+
+
+
 // Approach - DP(using a dp matrix)
 // Time Complexity - O(m*n)
 // Space Complexity - O(m*n)
