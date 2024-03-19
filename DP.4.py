@@ -21,8 +21,12 @@ Output: 4
 # Time Complexity:o(mn)
 # Space Complexity: o(mn)
 # Approach:
-Approach is
-
+# Approach is Dynamic Programming
+# initialize the matrix with the same dimensions 
+# dp(i, j)- represents the side length of the maximum square  
+# starting from index(0,0) for every one we can update the value of the current element  dp[i][j] = 1 + min(dp[i - 1][j], min(dp[i][j-1], dp[i - 1][j - 1]))
+# we traverse the original matrix once and find the maximum size. It gives the max length.
+# Result is area so square the max length
 
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
