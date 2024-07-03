@@ -1,6 +1,29 @@
 public class PartitionArrayForMaxSum {
 
     // Time Complexity :O(k + n) where  n is the length of arr
+    // Space Complexity : O(k)
+    // Did this code successfully run on Leetcode :yes
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        if(arr == null || arr.length == 0 || k > arr.length){
+            return 0;
+        }
+
+        int[] dp = new int[k];
+        for(int i=1; i<=arr.length; i++){
+            int maxContributor = 0;
+            int maxTotalSum = 0;
+
+            for(int subArrayLength = 1; subArrayLength <= k && i-subArrayLength >= 0; subArrayLength++){
+
+                maxContributor = Math.max(maxContributor, arr[i - subArrayLength]);
+                maxTotalSum = Math.max(maxTotalSum,  dp[(i - subArrayLength) % k] + (maxContributor * subArrayLength));
+            }
+            dp[i % k] = maxTotalSum;
+        }
+        return dp[arr.length % k]; // this is also important
+    }
+
+    // Time Complexity :O(k + n) where  n is the length of arr
     // Space Complexity : O(n)
     // Did this code successfully run on Leetcode :yes
     public int maxSumAfterPartitioningDP(int[] arr, int k) {
