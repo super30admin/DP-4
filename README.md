@@ -18,6 +18,46 @@ Input:
 
 Output: 4
 
+class Solution {
+    public int min(int a, int b){
+        return a<b?a:b;
+    }
+    public int maximalSquare(char[][] matrix) {
+        if(matrix==null || matrix.length == 0)
+            return 0;
+        int i, j, n = matrix.length, m = matrix[0].length, result = 0;
+        int[][] ans = new int[n][m];
+        for(i=0; i<matrix.length; i++){
+            ans[i][0]=matrix[i][0]-'0';
+            result=Math.max(result, ans[i][0]);
+        }
+ 
+        for(j=0; j<matrix[0].length; j++){
+            ans[0][j]=matrix[0][j]-'0';
+            result=Math.max(result, ans[0][j]);
+        }
+        
+        for(i=1;i<n;i++){
+            for(j=1;j<m;j++){
+                
+                if(matrix[i][j]=='1'){
+                    ans[i][j] = min(ans[i-1][j], min(ans[i][j-1], ans[i-1][j-1])) + 1;
+                    if (result < ans[i][j])
+                        result = ans[i][j];
+                }
+                else
+                    ans[i][j] = 0;
+            }
+        }
+        for(i=0;i<n;i++){
+            for(j=0;j<m;j++){
+                System.out.print(ans[i][j]);
+            }
+        }
+        return result*result;
+    }
+}
+
 ## Problem2:(https://leetcode.com/problems/partition-array-for-maximum-sum/)
 
 Given an integer array A, you partition the array into (contiguous) subarrays of length at most K.  After partitioning, each subarray has their values changed to become the maximum value of that subarray.
@@ -36,3 +76,4 @@ Note:
 
 1 <= K <= A.length <= 500
 0 <= A[i] <= 10^6
+
