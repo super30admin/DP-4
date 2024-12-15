@@ -1,0 +1,21 @@
+class Solution:
+    def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
+        n=len(arr)
+        has_cache=[False]*(n+1)
+        cache=[None]*(n+1)
+        def maxSum(index):
+            if index>=n:
+                return 0
+            if has_cache[index]:
+                return cache[index]
+            rolling=0
+            best=0
+            for i in range(k):
+                if index+i>=n:
+                    break
+                rolling=max(rolling,arr[index+i])
+                best=max(best,maxSum(index+i+1)+(i+1)*rolling)
+            has_cache[index]=True
+            cache[index]=best
+            return best
+        return maxSum(0)
