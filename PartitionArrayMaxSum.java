@@ -8,14 +8,14 @@ class Solution {
       int[] dp = new int[n]; // stores max partition sum
       dp[0]= arr[0];
       for(int i =1;i<n;i++){
+        int max = arr[i]; //considering incoming element as the max element
         // for each and every element apply the k partitions
-        int max = arr[i]; // incoming element
-        // update the max with all incoming numbers of our partition
         for(int j =1;j<=k && i-j+1 >=0;j++){ // j- no of elements for each partition
             max = Math.max(max,arr[i-j+1]);
             if(i-j>=0){
                 dp[i] = Math.max(dp[i],max*j+dp[i-j]);
             } else{
+                // if i-j+1 < 0 then no element to compare with
                 dp[i] = Math.max(dp[i],max*j);
             }
         }
