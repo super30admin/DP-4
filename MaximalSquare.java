@@ -49,7 +49,7 @@ class Solution {
 
 // Approach : DP with memoization
 // Time : O(m*n)
-// Space : O(1)
+// Space : O(m*n)
 class Solution {
     public int maximalSquare(char[][] matrix) {
         // edge case
