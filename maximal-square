@@ -1,0 +1,70 @@
+// Time Complexity :O(m^2 n^2)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+
+// Your code here along with comments explaining your approach:
+
+class Solution {
+    public int maximalSquare(char[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int max = 0; 
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+
+                if (matrix[i][j] == '1') { //where i find 1 in the matrix
+                    int len = 1; // initializing length as 1 because i find 1 in the matrix
+                    boolean flag = true; 
+                    while (flag && i + len < m && j + len < n) { // checking boundaries
+                        for (int k = i + len; k >= i; k--) { //checking whether 0 exist from diagonal to ith index(vertical)
+                            if (matrix[k][j + len] == '0') {
+                                flag = false;
+                            }
+                        }
+                        for (int k = j + len; k >= j; k--) { //checking whether 0 exist from diagonal to jth index (horizontal)
+                            if (matrix[i + len][k] == '0') {
+                                flag = false;
+                            }
+                        }
+                        if (flag) { //if no where i encounter zero among above itterations then incrementing length
+                            len++;
+                        }
+                    }
+
+                    max = Math.max(max, len); //finding max length of sub matrix among all possiblities
+                }
+
+            }
+        }
+        return max * max; 
+    }
+}
+
+// Time Complexity :O(m*n)
+// Space Complexity :O(m*n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+
+// Your code here along with comments explaining your approach:
+
+
+class Solution {
+    public int maximalSquare(char[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int max = 0;
+        int[][] dp = new int[m + 1][n + 1]; //using new space for dp array of size m+1 and n+1
+        for (int i = m - 1; i >= 0; i--) { //bottom up approach where i start filling dp from bottom 
+            for (int j = n - 1; j >= 0; j--) {
+                    if(matrix[i][j] == '1'){ //if matrix contain zer at specified indexs
+                        dp[i][j] = 1+Math.min(dp[i+1][j+1],Math.min(dp[i+1][j],dp[i][j+1])); //finding min among right ,diagonal and bottom of particulr element and adding one to it 
+                        max=Math.max(max,dp[i][j]); //finding max among all possibilities
+                    }
+            }
+        }
+        return max * max;
+    }
+}

@@ -1,0 +1,107 @@
+// Time Complexity : O(k^n)
+// Space Complexity : 
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+
+// Your code here along with comments explaining your approach:
+class Solution {
+
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        return helper(arr, 0, k); //recursion starts with pivot 0
+    }
+
+    public int helper(int[] arr, int pivot, int k) {
+        if (pivot == arr.length) {
+            System.out.println("base i   pivot " + pivot);
+            return 0;
+        }
+        int result = 0; //max result
+        int max = 0; //max for each current partition
+        System.out.println("before for");
+
+        for (int i = pivot; i < pivot + k && i < arr.length; i++) { //checking boundaries
+            System.out.println("in for i " + i + " pivot " + pivot);
+            max = Math.max(max, arr[i]); //max between current partition
+            int currentPartition = max * (i - pivot + 1); // sum of current partition 
+
+            int rest = helper(arr, i + 1, k); //recusrion for remaining subarray
+
+            result = Math.max(result, currentPartition + rest); //max among all partition done so far
+            System.out.println("result " + i + " pivot " + pivot + " result " + result);
+        }
+        return result;
+    }
+}
+
+
+// Time Complexity : O(k*n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+
+// Your code here along with comments explaining your approach:
+class Solution {
+
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        int[] memoization = new int[arr.length]; //to store sum of subproblems
+        Arrays.fill(memoization, -1); // filling with -1
+        return helper(arr, 0, k, memoization); // recursion start from pivot as 0
+    }
+
+    public int helper(int[] arr, int pivot, int k, int[] memoization) {
+        if (pivot == arr.length) { // pivot reaches end of array then return 0 
+            return 0;
+        }
+        if (memoization[pivot] != -1) { // if the  array of pivot partition alreay calculated and put them in memoization
+            return memoization[pivot]; // Early return if the result is already memoized
+        }
+        int result = 0;
+        int max = 0;
+
+        for (int i = pivot; i < pivot + k && i < arr.length; i++) {
+            max = Math.max(max, arr[i]); // max at current partition
+            int currentPartition = max * (i - pivot + 1); // sum of current partition
+
+            int rest = helper(arr, i + 1, k, memoization); // recursion for remaining subarray
+
+            result = Math.max(result, currentPartition + rest); // finding max among all possible partitions so far
+
+        }
+        memoization[pivot] = result; //storinhg result in memozation to avoid recursion through similar subproblem again
+        return result;
+    }
+}
+
+
+// Time Complexity : O(nk)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+
+// Your code here along with comments explaining your approach:single dimension dp array
+
+// solution-3
+// dp
+class Solution {
+
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        int[] dp = new int[arr.length]; // dp array of length as array length
+        dp[0] = arr[0]; // filling first partion sum 
+        for (int i = 1; i < arr.length; i++) { 
+            int max = 0;
+            for (int j = 1; j <= k && i - j + 1 >= 0; j++) { // for partition
+                max = Math.max(max, arr[i - j + 1]); // max from current partition
+                if (i - j < 0) { //if no previous partition just adding previous sum as zero
+                    dp[i] = Math.max(dp[i], max * j + 0);
+                } else {//adding prev partion sum to current
+                    dp[i] = Math.max(dp[i], max * j + dp[i - j]);
+                }
+                   }
+        }
+        return dp[arr.length - 1]; //max at arr.lentgh-1 of dp array 
+
+    }
+}
